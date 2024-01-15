@@ -103,6 +103,51 @@ public class Aplicativo {
 
         this.listaDeEventos.add(e);
     }
+
+    public boolean procurarEmpresa(String cnpj) {
+        boolean empresaCadastrada=false;
+        for(Empresa empresa : this.listaDeEmpresas){
+            if (cnpj.equals(empresa.getCnpj())) {
+                empresaCadastrada=true;
+            }
+        }
+        return empresaCadastrada;
+    }
+
+    public boolean verificarSeEmpresaLogada(String cnpj) {
+        boolean empresaLogada=false;
+        for(Empresa empresa: this.listaDeEmpresas){
+             if(cnpj.equals(empresa.getCnpj())){
+                empresaLogada = this.logarEmpresa(cnpj);
+        //         String senha = EntradaSaida.pedirDados("a senha: ");
+        //         while(!senha.equals(empresa.getSenha())){
+        //             System.out.println("Senha Inválida! ");
+        //             senha = EntradaSaida.pedirDados("a senha: ");
+        //         }
+        //         empresaLogada = true;
+             }
+        }
+        return empresaLogada;
+    }
+
+    public boolean logarEmpresa(String cnpj) {
+        boolean empresaLogada=false;
+        for(Empresa empresa: this.listaDeEmpresas){
+            if(cnpj.equals(empresa.getCnpj())){
+                String senha = EntradaSaida.pedirDados("a senha: ");
+                while(!senha.equals(empresa.getSenha())){
+                    System.out.println("Senha Inválida! ");
+                    senha = EntradaSaida.pedirDados("a senha: ");
+                }
+                empresaLogada = true;
+            }
+        }
+        return empresaLogada;
+    }
+
+    public void adicionarEmpresa(Empresa empresa) {
+        this.listaDeEmpresas.add(empresa);
+    }
 }
 
 

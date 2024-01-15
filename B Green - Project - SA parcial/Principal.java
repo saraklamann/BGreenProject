@@ -30,10 +30,10 @@ public class Principal{
                     break;
                 case 3:
                     if (empresaLogada==true) {
-                        Empresa.chamarMetodos();
+                        Empresa.chamarMetodos(a);
                     } else {
                         Empresa.logarEmpresa(a);
-                        Empresa.chamarMetodos();
+                        Empresa.chamarMetodos(a);
                     }
                     break;
             }

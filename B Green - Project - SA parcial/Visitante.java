@@ -22,7 +22,7 @@ public class Visitante {
                     break;
                 case 2:
                     //Empresa.logarEmpresa();
-                    Empresa.chamarMetodos();
+                    Empresa.chamarMetodos(app);
                     break;
                 case 3:
                     EntradaSaida.mostrarEmpresasParceiras(app.listarEmpresas());
