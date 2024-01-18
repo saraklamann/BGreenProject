@@ -6,7 +6,6 @@ public class Empresa {
     private String usuarioResponsavel;
     private String senha;
     private String descricao;
-    public Postos posto;
 
     public String getNome() {
         return nome;
@@ -38,24 +37,26 @@ public class Empresa {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
-    public Postos getPosto() {
-        return posto;
-    }
-    public void setPosto(Postos posto) {
-        this.posto = posto;
-    }
 
     public ArrayList<Postos> listaDePostosDeColeta = new ArrayList<Postos>();
 
-    public static Postos adicionarPosto() {
+    public Postos adicionarPosto(String cnpj, Aplicativo app, Empresa empresa) {
         Postos p = new Postos();
                     p.cidade = EntradaSaida.pedirDados("a cidade em que se encontra o posto de coleta: ");
                     p.rua = EntradaSaida.pedirDados("a rua em que se encontra o posto de coleta: ");
                     p.numero = EntradaSaida.pedirDados("o numero em que se encontra o posto de coleta: ");
+                    p.empresa = empresa;
+                    for(Empresa e : app.listaDeEmpresas){
+                        System.out.println("Adicionou posto!");
+
+                        if (e.cnpj.equalsIgnoreCase(cnpj)) {
+                            this.listaDePostosDeColeta.add(p);
+                        }
+                    }    
         return p;
     }
 
-    public static void logarEmpresa(Aplicativo app) {
+    public static String logarEmpresa(Aplicativo app) {
         int opcao = 0;
         String cnpj = EntradaSaida.pedirDados("O CNPJ da empresa para logar: ");
         while (app.procurarEmpresa(cnpj)==false) {
@@ -69,11 +70,9 @@ public class Empresa {
                 empresa.setSenha(EntradaSaida.pedirDados("a senha para a empresa: "));
                 empresa.setUsuarioResponsavel(EntradaSaida.pedirDados("o usuário responsável pela empresa: "));
                 empresa.setDescricao(EntradaSaida.pedirDados("para onde vai o material coletado: "));
-                Postos p = new Postos();
-                p.cidade = EntradaSaida.pedirDados("a cidade em que se localiza o posto de coleta: ");
-                p.rua = EntradaSaida.pedirDados("a rua em que se localiza o posto de coleta: ");
-                p.numero = EntradaSaida.pedirDados("o numero em que se localiza o posto de coleta: ");
                 app.adicionarEmpresa(empresa);
+                empresa.adicionarPosto(cnpj, app, empresa);
+                //empresa = empresa.adicionarPosto(cnpj, app);
             } else {
                 cnpj = EntradaSaida.pedirDados("o CNPJ da empresa para logar: ");
                 app.procurarEmpresa(cnpj);
@@ -91,39 +90,43 @@ public class Empresa {
             empresaLogada = app.logarEmpresa(cnpj);
         }
         System.out.println("Empresa logada com sucesso! ");
+        return cnpj;
     }
 
-    public static void chamarMetodos(Aplicativo app) {
+    public static void chamarMetodos(Aplicativo app, boolean empresaLogada, String cnpj) {
         int opcao = 0;
         int n = 0;
-        boolean empresaLogada = false;
+        // boolean empresaLogada = false;
 
         do{
             n = 7;
             opcao=0;
-            if(empresaLogada==true){
+            if(empresaLogada == true){
                 EntradaSaida.mostrarMenuEmpresa();
                 opcao = EntradaSaida.pedirOpcao("");
                 Validacao.validarOpcao(opcao, n);
 
                 switch (opcao) {
-                    case 1:   
+                    case 1:  
                         EntradaSaida.mostrarEmpresasParceiras(app.listarEmpresas()); 
                         break;
                     case 2:
                         EntradaSaida.mostrarEventos(app.listarEventos());
                         break;
-                    
                     case 3:
                         //adicionar/remover posto
                         break;
                     case 4:
-                        //editar posto de coleta
+                        app.editarPosto(cnpj);
                         break;
                     case 5:
-                        //editar "para onde vai este material"
+                        app.editarDescricao(cnpj);
+                        System.out.println("Sessão 'para onde vai este material' alterada com sucesso!");
+                        break;
                     case 6:
                         empresaLogada = false;
+                        System.out.println("Empresa deslogada com sucesso!");
+                        break;
                     case 0: 
                         System.exit(0);
                 }

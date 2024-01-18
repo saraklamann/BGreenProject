@@ -1,11 +1,12 @@
 public class Visitante {
 
-    public static void chamarMetodos(Aplicativo app){ //pronto
+    public static void chamarMetodos(Aplicativo app){ 
         //Aplicativo aplicativo = new Aplicativo();
         int opcao=0;
         int n=0;
         String organizador = "";
         boolean usuarioLogado=false;
+        boolean empresaLogada=false;
 
         do{
             n = 4;
@@ -21,8 +22,8 @@ public class Visitante {
                     Voluntario.chamarMetodos(app, organizador, usuarioLogado);
                     break;
                 case 2:
-                    //Empresa.logarEmpresa();
-                    Empresa.chamarMetodos(app);
+                    String cnpj = Empresa.logarEmpresa(app);
+                    Empresa.chamarMetodos(app, empresaLogada, cnpj);
                     break;
                 case 3:
                     EntradaSaida.mostrarEmpresasParceiras(app.listarEmpresas());

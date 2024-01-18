@@ -7,6 +7,7 @@ public class Principal{
         boolean empresaLogada=false;
         int n=0;
         String organizador = "";
+        String cnpj="";
 
         do{
             usuarioLogado=false;
@@ -30,10 +31,10 @@ public class Principal{
                     break;
                 case 3:
                     if (empresaLogada==true) {
-                        Empresa.chamarMetodos(a);
+                        Empresa.chamarMetodos(a, empresaLogada, cnpj);
                     } else {
-                        Empresa.logarEmpresa(a);
-                        Empresa.chamarMetodos(a);
+                        cnpj = Empresa.logarEmpresa(a);
+                        Empresa.chamarMetodos(a,empresaLogada, cnpj);
                     }
                     break;
             }

@@ -113,14 +113,16 @@ public class Voluntario {
                         //ver eventos presença marcada
                         break;
                     case 5:
-                        Empresa.logarEmpresa(app);
+                        String cnpj = Empresa.logarEmpresa(app);
                         empresaLogada=true;
-                        //Empresa.chamarMetodos(app, organizador, usuarioLogado);
+                        Empresa.chamarMetodos(app, empresaLogada, cnpj);
                         break;
                     case 6:
                         usuarioLogado = false;
                         System.out.println("\n Deslogado com sucesso!");
                         break;
+                    case 0:
+                        System.exit(0);
                 }
 
                 if (opcao == 6) {

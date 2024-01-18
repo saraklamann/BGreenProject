@@ -56,15 +56,21 @@ public class Aplicativo {
         return usuarioLogado;
     }
 
-    public String listarEmpresas(){ //fazer o menu la
+    public String listarEmpresas(){ 
         String empresas= "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n" +
                          "                                  \n" +
                          "      As empresas parceiras são:  \n\n" +
                          "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n\n";
         for(Empresa c : this.listaDeEmpresas){
             empresas += c.getNome() + "\n" +
-                       "1 - Postos de coleta \n" +
-                       "2 - Para onde vai este material?\n\n" +
+                       "POSTOS DE COLETA:\n";
+            for(Postos p: c.listaDePostosDeColeta){
+                if (p.empresa.getCnpj().equals(c.getCnpj())) {
+                    empresas += p.rua + ", " + p.numero  + " - " + p.cidade + "\n\n";  
+                }
+            }
+            empresas += "PARA ONDE VAI ESTE MATERIAL?\n" +
+                        c.getDescricao() + "\n\n"+
                        "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n\n";
         }
         return empresas;
@@ -147,6 +153,32 @@ public class Aplicativo {
 
     public void adicionarEmpresa(Empresa empresa) {
         this.listaDeEmpresas.add(empresa);
+    }
+
+    public void editarDescricao(String cnpj) {
+        for(Empresa e: this.listaDeEmpresas){
+            if (cnpj.equals(e.getCnpj())) {
+                e.setDescricao(EntradaSaida.pedirDados("Para onde vai o material coletado: "));
+            }
+        }
+    }
+
+    public void editarPosto(String cnpj) {
+        for(Empresa e : this.listaDeEmpresas){
+            if (cnpj.equals(e.getCnpj())) {
+                String rua = EntradaSaida.pedirDados("a rua do endereço a ser alterado: ");
+                String numero = EntradaSaida.pedirDados("o numero do endereço a ser alterado: ");
+                for(Postos p : e.listaDePostosDeColeta){
+                    if (numero.equalsIgnoreCase(p.numero) && rua.equals(p.rua)) {
+                        p.cidade = EntradaSaida.pedirDados("a nova cidade em que se encontra o posto de coleta: ");
+                        p.rua = EntradaSaida.pedirDados("a nova rua em que se encontra o posto de coleta: ");
+                        p.numero = EntradaSaida.pedirDados("o novo numero em que se encontra o posto de coleta: ");
+                    } else {
+                        System.out.println("Posto não encontrado! ");
+                    }
+                }
+            }
+        }
     }
 }
 
