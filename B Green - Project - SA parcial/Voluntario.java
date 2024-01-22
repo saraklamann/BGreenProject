@@ -35,12 +35,21 @@ public class Voluntario {
     public void setSenha(String senha) {
         this.senha = senha;
     }
-    public String marcarEvento(Evento evento) {
-        this.eventosMarcados.add(evento);
-        return "Presença marcada com sucesso!";
-    }
     
-    public static String logarVoluntario(Aplicativo app){
+    public void marcarEvento(String nomeEvento, String nome, Aplicativo app) {
+        for(Evento e : app.listaDeEventos){
+            if(nomeEvento.equals(e.nome)){
+                for(Voluntario v : app.listaDeVoluntarios){
+                    if (nome.equalsIgnoreCase(v.getNomeUsuario())) {
+                        this.eventosMarcados.add(e);
+                        System.out.println("Presença marcada com sucesso!");
+                    }
+                } 
+            }
+        }  
+    }
+
+    public static Voluntario logarVoluntario(Aplicativo app){
         int opcao=0;
         String organizador="";
         boolean usuarioLogado=false;
@@ -64,12 +73,14 @@ public class Voluntario {
                         senha = EntradaSaida.pedirDados("senha novamente: ");
                     }
                     app.adicionarVoluntario(v);
+                    System.out.println("Usuário cadastrado com sucesso! ");
                 } else {
                     nome = EntradaSaida.pedirDados("o nome de usuário novamente: ");
                     app.procurarVoluntario(nome);
                 }
             }
-        
+            
+            nome = EntradaSaida.pedirDados("o nome de usuário para logar: ");
             while (app.procurarVoluntario(nome)==false) {
                 System.out.print("Usuário não encontrado! ");
                 nome = EntradaSaida.pedirDados("o nome de usuário novamente: ");
@@ -82,10 +93,10 @@ public class Voluntario {
             System.out.println("Usuário logado com sucesso!");
             organizador = nome;
         }
-        return organizador;
+        return v;
     }
     
-    public static void chamarMetodos(Aplicativo app, String organizador, boolean usuarioLogado) {
+    public static void chamarMetodos(Aplicativo app, String organizador, boolean usuarioLogado, Voluntario v) {
         //Aplicativo a = new Aplicativo();
         int opcao=0;
         int n=0;
@@ -110,12 +121,13 @@ public class Voluntario {
                         app.criarEvento(organizador);
                         break;
                     case 4:
-                        //ver eventos presença marcada
+                        String nomeEvento = EntradaSaida.pedirDados(" o nome do evento que deseja marcar presença: ");
+                        v.marcarEvento(nomeEvento, v.getNomeUsuario(), app);
                         break;
                     case 5:
-                        String cnpj = Empresa.logarEmpresa(app);
+                        Empresa e = Empresa.logarEmpresa(app);
                         empresaLogada=true;
-                        Empresa.chamarMetodos(app, empresaLogada, cnpj);
+                        Empresa.chamarMetodos(app, empresaLogada, e);
                         break;
                     case 6:
                         usuarioLogado = false;

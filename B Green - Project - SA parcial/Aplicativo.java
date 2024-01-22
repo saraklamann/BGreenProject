@@ -62,16 +62,18 @@ public class Aplicativo {
                          "      As empresas parceiras são:  \n\n" +
                          "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n\n";
         for(Empresa c : this.listaDeEmpresas){
-            empresas += c.getNome() + "\n" +
-                       "POSTOS DE COLETA:\n";
-            for(Postos p: c.listaDePostosDeColeta){
-                if (p.empresa.getCnpj().equals(c.getCnpj())) {
-                    empresas += p.rua + ", " + p.numero  + " - " + p.cidade + "\n\n";  
+            if (!listaDeEmpresas.isEmpty()){
+                empresas += c.getNome() + "\n" +
+                "POSTOS DE COLETA:\n";
+                for(Postos p: c.listaDePostosDeColeta){
+                    if (p.empresa.getCnpj().equals(c.getCnpj())) {
+                        empresas += p.rua + ", " + p.numero  + " - " + p.cidade + "\n\n";  
+                    }
                 }
             }
             empresas += "PARA ONDE VAI ESTE MATERIAL?\n" +
-                        c.getDescricao() + "\n\n"+
-                       "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n\n";
+            c.getDescricao() + "\n\n"+
+            "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n\n";                
         }
         return empresas;
     }
@@ -89,7 +91,8 @@ public class Aplicativo {
                 eventos += e.nome + "\n\n"+
                            "- Data do evento: " + e.data + "\n" +
                            "- Endereço do evento: " + e.endereco + "\n" +
-                           "- Organizador do evento: " + e.organizador +" \n\n" +
+                           "- Organizador do evento: " + e.organizador + "\n" +
+                           "- Junte-se aos outros n voluntarios neste evento!"+ "\n\n" +
                            "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n\n"; 
             }
         }
@@ -107,7 +110,7 @@ public class Aplicativo {
         e.endereco = EntradaSaida.pedirDados("o endereço do evento: ");
         e.organizador = organizador;
 
-        this.listaDeEventos.add(e);
+        this.listaDeEventos.add(e); 
     }
 
     public boolean procurarEmpresa(String cnpj) {
@@ -180,65 +183,5 @@ public class Aplicativo {
             }
         }
     }
+
 }
-
-
-
-
-
-
-
-
-
-
-    
-
-
-    // public void adicionarEmpresa(Empresa c) {
-    //     this.listaDeEmpresas.add(c);
-    // }
-
-    // public void criarEvento(Evento e) {
-    //     this.listaDeEventos.add(e);
-    // }
-
-    // public boolean procurarEvento(String nome) {
-    //     boolean eventoEncontrado=false;
-    //     for(Evento e : this.listaDeEventos){
-    //         if (nome.equals(e.nome)) {
-    //             eventoEncontrado = true;
-    //         }
-    //     }
-    //     return eventoEncontrado;
-    // }
-
-
-
-
-
-    // public boolean procurarEmpresa(String nome) {
-    //     boolean empresaCadastrada=false;
-
-    //     for(Empresa c : this.listaDeEmpresas){
-    //         if (nome.equalsIgnoreCase(c.getNome())){
-    //             empresaCadastrada = true;
-    //         }
-    //     }
-    //     return empresaCadastrada;
-    // }
-
-    // public boolean logarEmpresa(String nome) {
-    //     boolean empresaLogada=false;
-    //     for(Empresa c : this.listaDeEmpresas){
-    //         if (nome.equalsIgnoreCase(c.getNome()) ) {
-    //             String senha = EntradaSaida.pedirDados("a senha: ");
-    //             while (!senha.equals(c.getSenha())) {
-    //                 System.out.print("Senha Inválida! ");
-    //                 senha = EntradaSaida.pedirDados("a senha: ");
-    //             } 
-    //             empresaLogada = true; 
-    //         }
-    //     }
-    //     return empresaLogada;
-    // }
-

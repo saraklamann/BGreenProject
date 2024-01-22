@@ -22,8 +22,8 @@ public class Visitante {
                     Voluntario.chamarMetodos(app, organizador, usuarioLogado);
                     break;
                 case 2:
-                    String cnpj = Empresa.logarEmpresa(app);
-                    Empresa.chamarMetodos(app, empresaLogada, cnpj);
+                    Empresa e = Empresa.logarEmpresa(app);
+                    Empresa.chamarMetodos(app, empresaLogada, e);
                     break;
                 case 3:
                     EntradaSaida.mostrarEmpresasParceiras(app.listarEmpresas());

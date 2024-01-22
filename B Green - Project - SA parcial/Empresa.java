@@ -42,21 +42,39 @@ public class Empresa {
 
     public Postos adicionarPosto(String cnpj, Aplicativo app, Empresa empresa) {
         Postos p = new Postos();
-                    p.cidade = EntradaSaida.pedirDados("a cidade em que se encontra o posto de coleta: ");
-                    p.rua = EntradaSaida.pedirDados("a rua em que se encontra o posto de coleta: ");
-                    p.numero = EntradaSaida.pedirDados("o numero em que se encontra o posto de coleta: ");
-                    p.empresa = empresa;
-                    for(Empresa e : app.listaDeEmpresas){
-                        System.out.println("Adicionou posto!");
+        p.cidade = EntradaSaida.pedirDados("a cidade em que se encontra o posto de coleta: ");
+        p.rua = EntradaSaida.pedirDados("a rua em que se encontra o posto de coleta: ");
+        p.numero = EntradaSaida.pedirDados("o numero em que se encontra o posto de coleta: ");
+        p.empresa = empresa;
+        for(Empresa e : app.listaDeEmpresas){
+            System.out.println("Adicionou posto!");
 
-                        if (e.cnpj.equalsIgnoreCase(cnpj)) {
-                            this.listaDePostosDeColeta.add(p);
-                        }
-                    }    
+            if (e.cnpj.equalsIgnoreCase(cnpj)) {
+                this.listaDePostosDeColeta.add(p);
+            }
+        }    
         return p;
     }
 
-    public static String logarEmpresa(Aplicativo app) {
+    public void removerPosto(String cnpj, Aplicativo app, Empresa empresa) {
+        for(Empresa e : app.listaDeEmpresas){
+            if (e.cnpj.equalsIgnoreCase(cnpj)) {
+                String rua = EntradaSaida.pedirDados("a rua do endereço a ser removido: ");
+                String numero = EntradaSaida.pedirDados("o numero do endereço a ser removido: ");
+                for(Postos p : this.listaDePostosDeColeta){
+                    if (numero.equalsIgnoreCase(p.numero) && rua.equalsIgnoreCase(p.rua)) {
+                        this.listaDePostosDeColeta.remove(p);
+                        System.out.println("Posto de coleta removido com sucesso!");
+                        break;
+                    // } else {
+                    //     System.out.println("Posto não encontrado! ");
+                    }
+                }
+            }
+        }
+    }
+
+    public static Empresa logarEmpresa(Aplicativo app) {
         int opcao = 0;
         String cnpj = EntradaSaida.pedirDados("O CNPJ da empresa para logar: ");
         while (app.procurarEmpresa(cnpj)==false) {
@@ -73,6 +91,7 @@ public class Empresa {
                 app.adicionarEmpresa(empresa);
                 empresa.adicionarPosto(cnpj, app, empresa);
                 //empresa = empresa.adicionarPosto(cnpj, app);
+                return empresa;
             } else {
                 cnpj = EntradaSaida.pedirDados("o CNPJ da empresa para logar: ");
                 app.procurarEmpresa(cnpj);
@@ -90,10 +109,10 @@ public class Empresa {
             empresaLogada = app.logarEmpresa(cnpj);
         }
         System.out.println("Empresa logada com sucesso! ");
-        return cnpj;
+        return null;
     }
 
-    public static void chamarMetodos(Aplicativo app, boolean empresaLogada, String cnpj) {
+    public static void chamarMetodos(Aplicativo app, boolean empresaLogada, Empresa empresa) {
         int opcao = 0;
         int n = 0;
         // boolean empresaLogada = false;
@@ -114,13 +133,25 @@ public class Empresa {
                         EntradaSaida.mostrarEventos(app.listarEventos());
                         break;
                     case 3:
-                        //adicionar/remover posto
+                        opcao = EntradaSaida.pedirOpcao("1 - Adicionar posto \n" +
+                        "2 - Remover posto \n");
+                        switch (opcao) {
+                            case 1:
+                                empresa.adicionarPosto(empresa.getCnpj(), app, empresa);
+                                break;
+                            case 2:
+                                empresa.removerPosto(empresa.getCnpj(), app, empresa);
+                                break;
+                            default:
+                                System.out.println("Opção Inválida!");
+                                break;
+                        }
                         break;
                     case 4:
-                        app.editarPosto(cnpj);
+                        app.editarPosto(empresa.getCnpj());
                         break;
                     case 5:
-                        app.editarDescricao(cnpj);
+                        app.editarDescricao(empresa.getCnpj());
                         System.out.println("Sessão 'para onde vai este material' alterada com sucesso!");
                         break;
                     case 6:
@@ -131,11 +162,10 @@ public class Empresa {
                         System.exit(0);
                 }
 
-                if(opcao ==6){
+                if(opcao == 6){
                     empresaLogada = false;
                 }
             }
         } while (opcao != 0);
     }
-
 }
