@@ -12,6 +12,16 @@
 # SOBRE O PROJETO
 <p> A ideia do projeto é ser uma rede social que conecte as empresas interessadas em preservar o meio ambiente e voluntários que gostam de se reunir para ajudar o planeta a continuar sendo um bom lugar para ser habitado por nós e pelas próximas gerações, a principio estamos apenas com uma aplicação em terminal, mas já há uma prototipação e em breve planejamos iniciar uma implementação gráfica e banco de dados. </p>
 
+# PROTÓTIPO:
+
+> <a href="https://www.figma.com/file/hCYrLEL8tgvrFGo10TJY0c/B-Green-Project?type=design&node-id=0-1&mode=design"><img src="https://img.shields.io/badge/FIGMA-768732?style=for-the-badge&logo=figma_351&logo"></a>
+
+# APRESENTAÇÕES DO PROJETO
+
+> <a href="https://www.canva.com/design/DAF0uILrYF4/CAb_UQeauH7ui0PrvK5l8g/view?utm_content=DAF0uILrYF4&utm_campaign=designshare&utm_medium=link&utm_source=editor"><img src="https://img.shields.io/badge/Primeira-Apresentação-768732?style=for-the-badge&logo=figma_351&logo"></a>
+
+> <a href="https://www.canva.com/design/DAF7SGmZbR8/I3hk6rgR7Bv4eU8Nshi9Pg/view?utm_content=DAF7SGmZbR8&utm_campaign=designshare&utm_medium=link&utm_source=editor"><img src="https://img.shields.io/badge/Segunda-Apresentação-768732?style=for-the-badge&logo=figma_351&logo"></a>
+
 <div align="left"> <h1> MANUAL DO VISITANTE </h1> </div>
 
 <h3> Os visitantes tem acesso a um menu com cinco funcionalidades, sendo elas: </h3>
