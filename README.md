@@ -48,9 +48,15 @@
 ![GITHUB](https://img.shields.io/badge/GITHUB-768732?style=for-the-badge&logo=github_351&logo)
 ![VSCODE](https://img.shields.io/badge/VSCODE-768732?style=for-the-badge&logo=visual-studio-code_351&logo)
 
-# AUTORAS:
+# AUTORAS: 
+<div align=center>
+   <h3> Sara C. K. Jucoski‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ Thayná Machado </h3>
+   <img width=30% src="https://avatars.githubusercontent.com/u/119754784?v=4&_nc_sid=8b3546"/> 
+   <img width=30% src="https://avatars.githubusercontent.com/u/108772832?v=4&color=768732&height=120"/>
+</div>
 
-<img width=35% src="https://instagram.fcfc1-1.fna.fbcdn.net/v/t51.2885-19/387269802_704933847804326_5905323814702607827_n.jpg?stp=dst-jpg_s150x150&_nc_ht=instagram.fcfc1-1.fna.fbcdn.net&_nc_cat=102&_nc_ohc=MRzsq8W04ewAX-jJ-Ug&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AfCW-7nPS3JXH1KuH-8oBmLNx9Wel0AieFJ_AFbGsW8cvQ&oe=65BBF394&_nc_sid=8b3546&color=768732&section=footer"/> &nbsp; Sara C. K. Jucoski
-<img width=35% src="https://avatars.githubusercontent.com/u/108772832?v=4&color=768732&height=120&section=footer"/> 
+# ENGLISH VERSION:
+
+Coming Soon...
 
 <img width=100% src="https://capsule-render.vercel.app/api?type=waving&color=768732&height=120&section=footer"/>
